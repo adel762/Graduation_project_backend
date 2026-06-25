@@ -1,0 +1,224 @@
+{
+  "info": {
+    "_postman_id": "aura-ai-egx-collection-v1",
+    "name": "Aura AI - EGX Stock Market API",
+    "description": "Complete API collection for the Aura AI stock prediction backend. Import this file into Postman, then set the `token` variable after logging in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000", "type": "string" },
+    { "key": "token",   "value": "PASTE_YOUR_JWT_TOKEN_HERE", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/users/register", "host": ["{{baseUrl}}"], "path": ["api", "users", "register"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"Ahmed Hassan\",\n  \"email\": \"ahmed.hassan@example.com\",\n  \"password\": \"SecurePass@123\",\n  \"accepted_terms\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.token) { pm.collectionVariables.set('token', json.token); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/users/login", "host": ["{{baseUrl}}"], "path": ["api", "users", "login"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmed.hassan@example.com\",\n  \"password\": \"SecurePass@123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "OAuth Login (Google)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.token) { pm.collectionVariables.set('token', json.token); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/users/oauth", "host": ["{{baseUrl}}"], "path": ["api", "users", "oauth"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"Sara Kamal\",\n  \"email\": \"sara.kamal@gmail.com\",\n  \"auth_provider\": \"google\"\n}"
+            }
+          }
+        },
+        {
+          "name": "OAuth Login (Apple)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/users/oauth", "host": ["{{baseUrl}}"], "path": ["api", "users", "oauth"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"Mohamed Ali\",\n  \"email\": \"m.ali@icloud.com\",\n  \"auth_provider\": \"apple\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Deposit Funds",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/users/deposit", "host": ["{{baseUrl}}"], "path": ["api", "users", "deposit"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 50000.00\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📈 Market",
+      "item": [
+        {
+          "name": "Get All Stocks",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/market/stocks", "host": ["{{baseUrl}}"], "path": ["api", "market", "stocks"] }
+          }
+        },
+        {
+          "name": "Get Stock Details by ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/market/stocks/1", "host": ["{{baseUrl}}"], "path": ["api", "market", "stocks", "1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "💼 Portfolio",
+      "item": [
+        {
+          "name": "Get My Portfolio (Net Worth)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/portfolio", "host": ["{{baseUrl}}"], "path": ["api", "portfolio"] }
+          }
+        },
+        {
+          "name": "Buy Stock",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/portfolio/trade", "host": ["{{baseUrl}}"], "path": ["api", "portfolio", "trade"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stock_id\": 1,\n  \"type\": \"BUY\",\n  \"quantity\": 10\n}"
+            }
+          }
+        },
+        {
+          "name": "Sell Stock",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/portfolio/trade", "host": ["{{baseUrl}}"], "path": ["api", "portfolio", "trade"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stock_id\": 1,\n  \"type\": \"SELL\",\n  \"quantity\": 5\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "⚙️ Automations",
+      "item": [
+        {
+          "name": "Create Smart Automation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/automations", "host": ["{{baseUrl}}"], "path": ["api", "automations"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stock_id\": 1,\n  \"action_type\": \"BUY\",\n  \"trigger_price\": 68.00,\n  \"quantity\": 20\n}"
+            }
+          }
+        },
+        {
+          "name": "Get My Automations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/automations", "host": ["{{baseUrl}}"], "path": ["api", "automations"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔔 Notifications",
+      "item": [
+        {
+          "name": "Get Notification Settings",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/notifications/settings", "host": ["{{baseUrl}}"], "path": ["api", "notifications", "settings"] }
+          }
+        },
+        {
+          "name": "Update Notification Settings",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/notifications/settings", "host": ["{{baseUrl}}"], "path": ["api", "notifications", "settings"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ai_alerts\": true,\n  \"price_volatility\": false,\n  \"market_news\": true\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

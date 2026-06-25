@@ -1,20 +1,15 @@
 import express from 'express';
-import { register, login } from '../Controllers/user.controller.js';
-import { authenticateJWT } from "../middleware/auth.middleware.js";
-
+import { register, login, oauth, deposit } from '../Controllers/user.controller.js';
+import { authenticateJWT } from '../Middleware/auth.middleware.js';
 
 const router = express.Router();
 
+// Public routes
 router.post('/register', register);
-router.post('/login', login);
+router.post('/login',    login);
+router.post('/oauth',    oauth);
 
-// Test
-router.get("/test", authenticateJWT, (req, res) => {
-    // req.user.email = "";
-    res.json({
-        message: "User profile",
-        user: req.user,
-    });
-});
+// Protected routes
+router.post('/deposit', authenticateJWT, deposit);
 
 export default router;
