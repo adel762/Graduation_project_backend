@@ -1,0 +1,27 @@
+$kind: http-request
+name: POST /api/users/oauth (Google)
+url: "{{baseUrl}}/api/users/oauth"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "Sara Kamal",
+      "email": "sara.kamal@gmail.com",
+      "auth_provider": "google"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+      if (pm.response.code === 200 && json.token) {
+          pm.collectionVariables.set('token', json.token);
+          console.log('✅ OAuth Token auto-saved to {{token}}');
+      } else {
+          console.warn('⚠️ OAuth login failed or no token returned.');
+      }
+    language: text/javascript
+examples: ./.resources/POST -api-users-oauth (Google).resources/examples
+order: 3000

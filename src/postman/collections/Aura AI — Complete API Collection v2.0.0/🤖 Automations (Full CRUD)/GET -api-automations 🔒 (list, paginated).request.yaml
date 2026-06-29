@@ -1,0 +1,15 @@
+$kind: http-request
+name: GET /api/automations 🔒 (list, paginated)
+url: "{{baseUrl}}/api/automations?limit=10&offset=0"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+queryParams:
+  - key: limit
+    value: "10"
+    description: Max automations per page
+  - key: offset
+    value: "0"
+    description: Records to skip
+examples: ./.resources/GET -api-automations 🔒 (list, paginated).resources/examples
+order: 2000

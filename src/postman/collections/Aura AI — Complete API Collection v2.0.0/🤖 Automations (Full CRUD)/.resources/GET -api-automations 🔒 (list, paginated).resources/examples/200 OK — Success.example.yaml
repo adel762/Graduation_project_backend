@@ -1,0 +1,45 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/automations?limit=10&offset=0"
+  method: GET
+  headers:
+    Authorization: Bearer {{token}}
+  queryParams:
+    - key: limit
+      value: "10"
+      description: Max automations per page
+    - key: offset
+      value: "0"
+      description: Records to skip
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": true,
+        "data": {
+          "total": 1,
+          "limit": 10,
+          "offset": 0,
+          "automations": [
+            {
+              "id": 1,
+              "user_id": 1,
+              "stock_id": 1,
+              "action_type": "BUY",
+              "trigger_price": "65.00",
+              "quantity": "15.0000",
+              "status": "PENDING",
+              "created_at": "2026-06-28T01:00:00.000Z",
+              "updated_at": "2026-06-28T01:00:00.000Z",
+              "stock": { "id": 1, "symbol": "COMI", "name_en": "Commercial International Bank", "name_ar": "البنك التجاري الدولي" }
+            }
+          ]
+        },
+        "message": "Automations fetched successfully."
+      }
+order: 1000

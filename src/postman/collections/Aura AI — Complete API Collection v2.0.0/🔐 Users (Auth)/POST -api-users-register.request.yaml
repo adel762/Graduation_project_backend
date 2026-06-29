@@ -1,0 +1,17 @@
+$kind: http-request
+name: POST /api/users/register
+url: "{{baseUrl}}/api/users/register"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "username": "Ahmed Hassan",
+      "email": "ahmed.hassan@example.com",
+      "password": "SecurePass@123",
+      "accepted_terms": true
+    }
+examples: ./.resources/POST -api-users-register.resources/examples
+order: 1000

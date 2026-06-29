@@ -7,7 +7,9 @@ import sequelize from './src/config/db.js';
 import './src/Models/index.model.js';
 
 // Routes
+import authRoutes         from './src/Routes/auth.routes.js';
 import userRoutes         from './src/Routes/user.routes.js';
+import userProfileRoutes  from './src/Routes/userProfile.routes.js';
 import marketRoutes       from './src/Routes/market.routes.js';
 import portfolioRoutes    from './src/Routes/portfolio.routes.js';
 import automationRoutes   from './src/Routes/automation.routes.js';
@@ -21,11 +23,13 @@ app.use(express.json());
 
 // ─── Health check ──────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
-  res.json({ message: '🚀 Aura AI API is running!', version: '1.0.0' });
+  res.json({ success: true, data: { version: '2.0.0' }, message: '🚀 Aura AI API is running!' });
 });
 
 // ─── API Routes ────────────────────────────────────────────────────────────────
+app.use('/api/auth',          authRoutes);
 app.use('/api/users',         userRoutes);
+app.use('/api/user',          userProfileRoutes);
 app.use('/api/market',        marketRoutes);
 app.use('/api/portfolio',     portfolioRoutes);
 app.use('/api/automations',   automationRoutes);
@@ -33,16 +37,16 @@ app.use('/api/notifications', notificationRoutes);
 
 // ─── 404 Handler ──────────────────────────────────────────────────────────────
 app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found ❌' });
+  res.status(404).json({ success: false, data: null, message: 'Route not found.' });
 });
 
 // ─── DB Connection & Server Start ─────────────────────────────────────────────
 sequelize
-  .sync({ alter: true }) // alter: keeps existing data, updates table columns
+  .sync({ alter: true })
   .then(() => {
     console.log('✅ DB Connected & Synced');
     app.listen(process.env.PORT || 3000, () => {
-      console.log(`🚀 Aura AI Server running on port ${process.env.PORT || 3000}`);
+      console.log(`🚀 Aura AI Server v2.0.0 running on port ${process.env.PORT || 3000}`);
     });
   })
   .catch((err) => {

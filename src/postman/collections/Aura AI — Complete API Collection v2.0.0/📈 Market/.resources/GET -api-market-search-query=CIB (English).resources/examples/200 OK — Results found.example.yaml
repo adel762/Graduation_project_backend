@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/market/search?query=CIB&limit=10&offset=0"
+  method: GET
+  queryParams:
+    - key: query
+      value: CIB
+      description: Search term (symbol, EN name, or AR name)
+    - key: limit
+      value: "10"
+      description: Max results per page
+    - key: offset
+      value: "0"
+      description: Records to skip
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": true,
+        "data": {
+          "total": 1,
+          "limit": 10,
+          "offset": 0,
+          "stocks": [
+            {
+              "id": 1,
+              "symbol": "COMI",
+              "name_en": "Commercial International Bank",
+              "name_ar": "البنك التجاري الدولي",
+              "prices": [{ "current_price": "72.50", "change_percentage": "2.35", "is_positive": true }],
+              "signals": [{ "signal_type": "Strong Buy", "confidence_score": 88, "market_mood": "Bullish" }]
+            }
+          ]
+        },
+        "message": "Search results for \"CIB\"."
+      }
+order: 1000

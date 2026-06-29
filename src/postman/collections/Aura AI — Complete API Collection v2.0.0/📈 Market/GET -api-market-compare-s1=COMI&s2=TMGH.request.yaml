@@ -1,0 +1,13 @@
+$kind: http-request
+name: GET /api/market/compare?s1=COMI&s2=TMGH
+url: "{{baseUrl}}/api/market/compare?s1=COMI&s2=TMGH"
+method: GET
+queryParams:
+  - key: s1
+    value: COMI
+    description: First stock symbol
+  - key: s2
+    value: TMGH
+    description: Second stock symbol
+examples: ./.resources/GET -api-market-compare-s1=COMI&s2=TMGH.resources/examples
+order: 5000

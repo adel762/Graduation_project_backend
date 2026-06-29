@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/automations/{{automationId}}"
+  method: DELETE
+  headers:
+    Authorization: Bearer {{token}}
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": false,
+        "data": null,
+        "message": "Automation not found or does not belong to you."
+      }
+order: 2000

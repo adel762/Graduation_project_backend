@@ -1,0 +1,40 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/automations"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Authorization: Bearer {{token}}
+  body:
+    type: json
+    content: |-
+      {
+        "stock_id": 1,
+        "action_type": "BUY",
+        "trigger_price": 65.00,
+        "quantity": 15
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": true,
+        "data": {
+          "id": 1,
+          "user_id": 1,
+          "stock_id": 1,
+          "action_type": "BUY",
+          "trigger_price": "65.00",
+          "quantity": "15.0000",
+          "status": "PENDING",
+          "created_at": "2026-06-28T01:00:00.000Z",
+          "updated_at": "2026-06-28T01:00:00.000Z"
+        },
+        "message": "Smart automation created successfully."
+      }
+order: 1000

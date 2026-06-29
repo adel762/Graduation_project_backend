@@ -1,0 +1,15 @@
+$kind: http-request
+name: GET /api/portfolio 🔒 (with metrics & pagination)
+url: "{{baseUrl}}/api/portfolio?limit=20&offset=0"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+queryParams:
+  - key: limit
+    value: "20"
+    description: Max holdings per page
+  - key: offset
+    value: "0"
+    description: Holdings to skip
+examples: ./.resources/GET -api-portfolio 🔒 (with metrics & pagination).resources/examples
+order: 1000

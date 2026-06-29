@@ -1,0 +1,36 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/portfolio/trade"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Authorization: Bearer {{token}}
+  body:
+    type: json
+    content: |-
+      {
+        "stock_id": 1,
+        "type": "BUY",
+        "quantity": 10
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": true,
+        "data": {
+          "type": "BUY",
+          "stock": { "id": 1, "symbol": "COMI", "name_en": "Commercial International Bank" },
+          "quantity": 10,
+          "price_per_share": 72.50,
+          "total_amount": 725.00,
+          "new_balance": 49275.00
+        },
+        "message": "BUY trade executed successfully."
+      }
+order: 1000

@@ -1,0 +1,14 @@
+$kind: http-request
+name: GET /api/market/search?query=بنك (Arabic)
+url: "{{baseUrl}}/api/market/search?query=بنك&limit=10&offset=0"
+method: GET
+queryParams:
+  - key: query
+    value: بنك
+    description: Arabic search term
+  - key: limit
+    value: "10"
+  - key: offset
+    value: "0"
+examples: ./.resources/GET -api-market-search-query=بنك (Arabic).resources/examples
+order: 4000

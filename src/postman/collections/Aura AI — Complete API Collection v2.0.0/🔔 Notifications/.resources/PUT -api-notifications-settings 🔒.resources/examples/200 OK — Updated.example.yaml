@@ -1,0 +1,37 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/notifications/settings"
+  method: PUT
+  headers:
+    Content-Type: application/json
+    Authorization: Bearer {{token}}
+  body:
+    type: json
+    content: |-
+      {
+        "ai_alerts": true,
+        "price_volatility": false,
+        "market_news": true
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": true,
+        "data": {
+          "id": 1,
+          "user_id": 1,
+          "ai_alerts": true,
+          "price_volatility": false,
+          "market_news": true,
+          "created_at": "2026-06-28T00:00:00.000Z",
+          "updated_at": "2026-06-28T01:00:00.000Z"
+        },
+        "message": "Notification settings updated ✅"
+      }
+order: 1000

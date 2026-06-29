@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/users/register"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "username": "Ahmed Hassan",
+        "email": "ahmed.hassan@example.com",
+        "password": "SecurePass@123",
+        "accepted_terms": true
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "message": "User registered successfully ✅",
+        "user": {
+          "id": 1,
+          "username": "Ahmed Hassan",
+          "email": "ahmed.hassan@example.com"
+        }
+      }
+order: 1000

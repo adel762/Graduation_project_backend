@@ -1,0 +1,26 @@
+$kind: http-request
+name: POST /api/users/login
+url: "{{baseUrl}}/api/users/login"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "ahmed.hassan@example.com",
+      "password": "SecurePass@123"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+      if (pm.response.code === 200 && json.token) {
+          pm.collectionVariables.set('token', json.token);
+          console.log('✅ Token auto-saved to {{token}}');
+      } else {
+          console.warn('⚠️ Login failed or no token returned. Check credentials.');
+      }
+    language: text/javascript
+examples: ./.resources/POST -api-users-login.resources/examples
+order: 2000

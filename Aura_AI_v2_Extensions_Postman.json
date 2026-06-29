@@ -1,0 +1,224 @@
+{
+  "info": {
+    "_postman_id": "aura-ai-v2-extensions",
+    "name": "Aura AI v2 — New Endpoints (Audit Extensions)",
+    "description": "Postman Collection for all NEW endpoints added in the Technical Audit Extension. Import this file, run Login first to auto-capture the token, then test all routes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000", "type": "string" },
+    { "key": "token",   "value": "PASTE_YOUR_JWT_TOKEN_HERE", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Login (auto-capture token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.token) { pm.collectionVariables.set('token', json.token); console.log('Token saved!'); }"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/users/login", "host": ["{{baseUrl}}"], "path": ["api", "users", "login"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmed.hassan@example.com\",\n  \"password\": \"SecurePass@123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "GET /api/auth/me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/me", "host": ["{{baseUrl}}"], "path": ["api", "auth", "me"] }
+          }
+        },
+        {
+          "name": "POST /api/auth/logout",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/logout", "host": ["{{baseUrl}}"], "path": ["api", "auth", "logout"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "👤 User Preferences",
+      "item": [
+        {
+          "name": "POST /api/user/preferences (set)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/user/preferences", "host": ["{{baseUrl}}"], "path": ["api", "user", "preferences"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"risk_tolerance\": \"High\",\n  \"primary_goal\": \"Growth\"\n}"
+            }
+          }
+        },
+        {
+          "name": "GET /api/user/preferences",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/user/preferences", "host": ["{{baseUrl}}"], "path": ["api", "user", "preferences"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📈 Market",
+      "item": [
+        {
+          "name": "GET /api/market/stocks (paginated)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/market/stocks?limit=10&offset=0", "host": ["{{baseUrl}}"], "path": ["api", "market", "stocks"], "query": [{ "key": "limit", "value": "10" }, { "key": "offset", "value": "0" }] }
+          }
+        },
+        {
+          "name": "GET /api/market/stocks/:id (full details)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/market/stocks/1", "host": ["{{baseUrl}}"], "path": ["api", "market", "stocks", "1"] }
+          }
+        },
+        {
+          "name": "GET /api/market/search?query=CIB",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/market/search?query=CIB&limit=10&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "market", "search"],
+              "query": [{ "key": "query", "value": "CIB" }, { "key": "limit", "value": "10" }, { "key": "offset", "value": "0" }]
+            }
+          }
+        },
+        {
+          "name": "GET /api/market/search?query=بنك (Arabic)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/market/search?query=بنك&limit=10&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "market", "search"],
+              "query": [{ "key": "query", "value": "بنك" }, { "key": "limit", "value": "10" }, { "key": "offset", "value": "0" }]
+            }
+          }
+        },
+        {
+          "name": "GET /api/market/compare?s1=COMI&s2=TMGH",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/market/compare?s1=COMI&s2=TMGH",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "market", "compare"],
+              "query": [{ "key": "s1", "value": "COMI" }, { "key": "s2", "value": "TMGH" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "💼 Portfolio",
+      "item": [
+        {
+          "name": "GET /api/portfolio (with metrics & pagination)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/portfolio?limit=20&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "portfolio"],
+              "query": [{ "key": "limit", "value": "20" }, { "key": "offset", "value": "0" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "⚙️ Automations (Full CRUD)",
+      "item": [
+        {
+          "name": "POST /api/automations (create)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/automations", "host": ["{{baseUrl}}"], "path": ["api", "automations"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stock_id\": 1,\n  \"action_type\": \"BUY\",\n  \"trigger_price\": 65.00,\n  \"quantity\": 15\n}"
+            }
+          }
+        },
+        {
+          "name": "GET /api/automations (list, paginated)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/api/automations?limit=10&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "automations"],
+              "query": [{ "key": "limit", "value": "10" }, { "key": "offset", "value": "0" }]
+            }
+          }
+        },
+        {
+          "name": "GET /api/automations/:id (single)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/automations/1", "host": ["{{baseUrl}}"], "path": ["api", "automations", "1"] }
+          }
+        },
+        {
+          "name": "PATCH /api/automations/:id (update)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/automations/1", "host": ["{{baseUrl}}"], "path": ["api", "automations", "1"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"trigger_price\": 63.50,\n  \"quantity\": 20,\n  \"action_type\": \"BUY\"\n}"
+            }
+          }
+        },
+        {
+          "name": "DELETE /api/automations/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/automations/1", "host": ["{{baseUrl}}"], "path": ["api", "automations", "1"] }
+          }
+        }
+      ]
+    }
+  ]
+}

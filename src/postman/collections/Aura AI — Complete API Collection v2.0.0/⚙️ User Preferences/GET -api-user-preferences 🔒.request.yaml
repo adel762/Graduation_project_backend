@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /api/user/preferences 🔒
+url: "{{baseUrl}}/api/user/preferences"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+examples: ./.resources/GET -api-user-preferences 🔒.resources/examples
+order: 2000

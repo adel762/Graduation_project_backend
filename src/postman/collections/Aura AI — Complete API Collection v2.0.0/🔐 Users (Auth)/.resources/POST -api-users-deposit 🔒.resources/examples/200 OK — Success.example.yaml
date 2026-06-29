@@ -1,0 +1,26 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/users/deposit"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Authorization: Bearer {{token}}
+  body:
+    type: json
+    content: |-
+      {
+        "amount": 50000.00
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "message": "Deposit successful ✅",
+        "balance": 50000.00
+      }
+order: 1000

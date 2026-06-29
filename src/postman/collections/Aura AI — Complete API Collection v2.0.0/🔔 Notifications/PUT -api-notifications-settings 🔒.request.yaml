@@ -1,0 +1,17 @@
+$kind: http-request
+name: PUT /api/notifications/settings 🔒
+url: "{{baseUrl}}/api/notifications/settings"
+method: PUT
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: |-
+    {
+      "ai_alerts": true,
+      "price_volatility": false,
+      "market_news": true
+    }
+examples: ./.resources/PUT -api-notifications-settings 🔒.resources/examples
+order: 2000

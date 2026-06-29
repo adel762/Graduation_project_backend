@@ -7,6 +7,8 @@ import AiSignal from './aiSignal.model.js';
 import Transaction from './transaction.model.js';
 import SmartAutomation from './smartAutomation.model.js';
 import NotificationSetting from './notificationSetting.model.js';
+import UserPreference from './userPreference.model.js';
+import TokenBlacklist from './tokenBlacklist.model.js';
 
 // ─── Associations ──────────────────────────────────────────────────────────────
 
@@ -43,8 +45,12 @@ Stock.hasMany(SmartAutomation,      { foreignKey: 'stock_id', as: 'automations',
 SmartAutomation.belongsTo(Stock,    { foreignKey: 'stock_id', as: 'stock' });
 
 // User   ↔  NotificationSetting  (1:1)
-User.hasOne(NotificationSetting,          { foreignKey: 'user_id', as: 'notificationSettings', onDelete: 'CASCADE' });
-NotificationSetting.belongsTo(User,       { foreignKey: 'user_id', as: 'user' });
+User.hasOne(NotificationSetting,    { foreignKey: 'user_id', as: 'notificationSettings', onDelete: 'CASCADE' });
+NotificationSetting.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+
+// User   ↔  UserPreference  (1:1)
+User.hasOne(UserPreference,         { foreignKey: 'user_id', as: 'preferences', onDelete: 'CASCADE' });
+UserPreference.belongsTo(User,      { foreignKey: 'user_id', as: 'user' });
 
 // ─── Exports ───────────────────────────────────────────────────────────────────
 export {
@@ -56,4 +62,6 @@ export {
   Transaction,
   SmartAutomation,
   NotificationSetting,
+  UserPreference,
+  TokenBlacklist,
 };

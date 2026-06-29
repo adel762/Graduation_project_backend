@@ -1,0 +1,8 @@
+$kind: http-request
+name: DELETE /api/automations/:id 🔒
+url: "{{baseUrl}}/api/automations/{{automationId}}"
+method: DELETE
+headers:
+  Authorization: Bearer {{token}}
+examples: ./.resources/DELETE -api-automations-id 🔒.resources/examples
+order: 5000

@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/market/compare?s1=COMI&s2=TMGH"
+  method: GET
+  queryParams:
+    - key: s1
+      value: COMI
+      description: First stock symbol
+    - key: s2
+      value: TMGH
+      description: Second stock symbol
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": true,
+        "data": {
+          "stock_1": {
+            "id": 1,
+            "symbol": "COMI",
+            "name_en": "Commercial International Bank",
+            "name_ar": "البنك التجاري الدولي",
+            "market_cap": "85.2B EGP",
+            "pe_ratio": "7.42",
+            "div_yield": "3.15",
+            "prices": [{ "current_price": "72.50", "change_percentage": "2.35", "is_positive": true }],
+            "signals": [{ "signal_type": "Strong Buy", "confidence_score": 88, "market_mood": "Bullish" }]
+          },
+          "stock_2": {
+            "id": 2,
+            "symbol": "TMGH",
+            "name_en": "Talaat Moustafa Group Holding",
+            "name_ar": "مجموعة طلعت مصطفى القابضة",
+            "market_cap": "42.7B EGP",
+            "pe_ratio": "12.30",
+            "div_yield": "1.80",
+            "prices": [{ "current_price": "22.80", "change_percentage": "-1.12", "is_positive": false }],
+            "signals": [{ "signal_type": "Hold", "confidence_score": 62, "market_mood": "Neutral" }]
+          }
+        },
+        "message": "Comparison between COMI and TMGH."
+      }
+order: 1000

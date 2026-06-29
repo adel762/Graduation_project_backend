@@ -1,0 +1,15 @@
+$kind: http-request
+name: POST /api/users/deposit 🔒
+url: "{{baseUrl}}/api/users/deposit"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: |-
+    {
+      "amount": 50000.00
+    }
+examples: ./.resources/POST -api-users-deposit 🔒.resources/examples
+order: 4000

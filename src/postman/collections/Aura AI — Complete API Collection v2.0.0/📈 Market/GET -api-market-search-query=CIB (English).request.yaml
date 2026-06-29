@@ -1,0 +1,16 @@
+$kind: http-request
+name: GET /api/market/search?query=CIB (English)
+url: "{{baseUrl}}/api/market/search?query=CIB&limit=10&offset=0"
+method: GET
+queryParams:
+  - key: query
+    value: CIB
+    description: Search term (symbol, EN name, or AR name)
+  - key: limit
+    value: "10"
+    description: Max results per page
+  - key: offset
+    value: "0"
+    description: Records to skip
+examples: ./.resources/GET -api-market-search-query=CIB (English).resources/examples
+order: 3000

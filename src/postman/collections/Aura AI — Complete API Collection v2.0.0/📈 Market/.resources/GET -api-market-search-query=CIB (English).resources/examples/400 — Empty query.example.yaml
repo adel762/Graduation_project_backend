@@ -1,0 +1,28 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/market/search?query=CIB&limit=10&offset=0"
+  method: GET
+  queryParams:
+    - key: query
+      value: CIB
+      description: Search term (symbol, EN name, or AR name)
+    - key: limit
+      value: "10"
+      description: Max results per page
+    - key: offset
+      value: "0"
+      description: Records to skip
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": false,
+        "data": null,
+        "message": "Search query cannot be empty."
+      }
+order: 3000

@@ -1,0 +1,16 @@
+$kind: http-request
+name: POST /api/user/preferences 🔒
+url: "{{baseUrl}}/api/user/preferences"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: |-
+    {
+      "risk_tolerance": "High",
+      "primary_goal": "Growth"
+    }
+examples: ./.resources/POST -api-user-preferences 🔒.resources/examples
+order: 1000

@@ -1,0 +1,17 @@
+$kind: http-request
+name: POST /api/portfolio/trade — SELL 🔒
+url: "{{baseUrl}}/api/portfolio/trade"
+method: POST
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: |-
+    {
+      "stock_id": 1,
+      "type": "SELL",
+      "quantity": 5
+    }
+examples: ./.resources/POST -api-portfolio-trade — SELL 🔒.resources/examples
+order: 3000

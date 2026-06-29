@@ -1,0 +1,13 @@
+$kind: http-request
+name: GET /api/market/stocks (paginated)
+url: "{{baseUrl}}/api/market/stocks?limit=10&offset=0"
+method: GET
+queryParams:
+  - key: limit
+    value: "10"
+    description: Max stocks per page
+  - key: offset
+    value: "0"
+    description: Records to skip
+examples: ./.resources/GET -api-market-stocks (paginated).resources/examples
+order: 1000

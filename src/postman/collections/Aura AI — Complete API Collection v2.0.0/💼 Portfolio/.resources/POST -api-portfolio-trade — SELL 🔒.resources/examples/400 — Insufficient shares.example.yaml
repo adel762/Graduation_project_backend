@@ -1,0 +1,29 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/portfolio/trade"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Authorization: Bearer {{token}}
+  body:
+    type: json
+    content: |-
+      {
+        "stock_id": 1,
+        "type": "SELL",
+        "quantity": 5
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": false,
+        "data": null,
+        "message": "Insufficient shares. You own 3.0000, trying to sell 10."
+      }
+order: 2000

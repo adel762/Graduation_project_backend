@@ -1,0 +1,28 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/user/preferences"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Authorization: Bearer {{token}}
+  body:
+    type: json
+    content: |-
+      {
+        "risk_tolerance": "High",
+        "primary_goal": "Growth"
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": false,
+        "data": null,
+        "message": "Invalid risk_tolerance. Must be one of: Low, Medium, High."
+      }
+order: 2000

@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /api/automations/:id 🔒 (single)
+url: "{{baseUrl}}/api/automations/{{automationId}}"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+examples: ./.resources/GET -api-automations-id 🔒 (single).resources/examples
+order: 3000

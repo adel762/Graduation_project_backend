@@ -1,0 +1,17 @@
+$kind: http-request
+name: PATCH /api/automations/:id 🔒 (update)
+url: "{{baseUrl}}/api/automations/{{automationId}}"
+method: PATCH
+headers:
+  Content-Type: application/json
+  Authorization: Bearer {{token}}
+body:
+  type: json
+  content: |-
+    {
+      "trigger_price": 63.50,
+      "quantity": 20,
+      "action_type": "BUY"
+    }
+examples: ./.resources/PATCH -api-automations-id 🔒 (update).resources/examples
+order: 4000

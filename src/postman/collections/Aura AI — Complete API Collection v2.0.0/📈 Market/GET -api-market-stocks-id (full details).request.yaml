@@ -1,0 +1,6 @@
+$kind: http-request
+name: GET /api/market/stocks/:id (full details)
+url: "{{baseUrl}}/api/market/stocks/1"
+method: GET
+examples: ./.resources/GET -api-market-stocks-id (full details).resources/examples
+order: 2000

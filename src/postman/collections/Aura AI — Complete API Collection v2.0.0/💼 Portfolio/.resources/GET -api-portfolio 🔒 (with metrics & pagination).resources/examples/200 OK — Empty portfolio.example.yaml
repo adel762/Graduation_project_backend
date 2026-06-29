@@ -1,0 +1,38 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/portfolio?limit=20&offset=0"
+  method: GET
+  headers:
+    Authorization: Bearer {{token}}
+  queryParams:
+    - key: limit
+      value: "20"
+      description: Max holdings per page
+    - key: offset
+      value: "0"
+      description: Holdings to skip
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": true,
+        "data": {
+          "summary": {
+            "wallet_balance": 50000.00,
+            "total_investment": 0.00,
+            "current_stocks_value": 0.00,
+            "total_profit_loss": 0.00,
+            "total_profit_loss_pct": 0,
+            "net_worth": 50000.00
+          },
+          "pagination": { "total": 0, "limit": 20, "offset": 0 },
+          "holdings": []
+        },
+        "message": "Portfolio fetched successfully."
+      }
+order: 2000

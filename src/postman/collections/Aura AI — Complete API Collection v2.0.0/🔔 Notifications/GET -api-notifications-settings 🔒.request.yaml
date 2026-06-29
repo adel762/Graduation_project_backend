@@ -1,0 +1,8 @@
+$kind: http-request
+name: GET /api/notifications/settings 🔒
+url: "{{baseUrl}}/api/notifications/settings"
+method: GET
+headers:
+  Authorization: Bearer {{token}}
+examples: ./.resources/GET -api-notifications-settings 🔒.resources/examples
+order: 1000

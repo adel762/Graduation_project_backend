@@ -1,0 +1,43 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/market/stocks?limit=10&offset=0"
+  method: GET
+  queryParams:
+    - key: limit
+      value: "10"
+      description: Max stocks per page
+    - key: offset
+      value: "0"
+      description: Records to skip
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": true,
+        "data": {
+          "total": 5,
+          "limit": 10,
+          "offset": 0,
+          "stocks": [
+            {
+              "id": 1,
+              "symbol": "COMI",
+              "name_en": "Commercial International Bank",
+              "name_ar": "البنك التجاري الدولي",
+              "market_cap": "85.2B EGP",
+              "pe_ratio": "7.42",
+              "div_yield": "3.15",
+              "avg_volume": "4.5M",
+              "prices": [{ "current_price": "72.50", "change_percentage": "2.35", "is_positive": true, "updated_at": "2026-06-28T00:00:00.000Z" }],
+              "signals": [{ "signal_type": "Strong Buy", "confidence_score": 88, "market_mood": "Bullish" }]
+            }
+          ]
+        },
+        "message": "Stocks fetched successfully."
+      }
+order: 1000

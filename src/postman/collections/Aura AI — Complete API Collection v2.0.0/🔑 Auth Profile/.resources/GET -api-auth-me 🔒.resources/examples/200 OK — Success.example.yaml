@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/auth/me"
+  method: GET
+  headers:
+    Authorization: Bearer {{token}}
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": true,
+        "data": {
+          "id": 1,
+          "username": "Ahmed Hassan",
+          "email": "ahmed.hassan@example.com",
+          "balance": "49275.00",
+          "accepted_terms": true,
+          "auth_provider": "local",
+          "preferences": {
+            "risk_tolerance": "High",
+            "primary_goal": "Growth"
+          }
+        },
+        "message": "User profile fetched successfully."
+      }
+order: 1000

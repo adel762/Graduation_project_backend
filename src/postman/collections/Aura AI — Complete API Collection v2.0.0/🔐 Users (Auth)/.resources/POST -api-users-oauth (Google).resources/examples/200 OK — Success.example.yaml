@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/users/oauth"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "username": "Sara Kamal",
+        "email": "sara.kamal@gmail.com",
+        "auth_provider": "google"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "message": "OAuth login successful ✅",
+        "token": "{{supabase_service_role_api_key_1bnn}}",
+        "user": {
+          "id": 2,
+          "username": "Sara Kamal",
+          "email": "sara.kamal@gmail.com"
+        }
+      }
+order: 1000
